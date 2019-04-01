@@ -2,17 +2,23 @@ package corto2;
 
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class Control {
 
-    ArrayList<Alumno> lumnoList;
+    ArrayList<Alumno> alumnoList = new ArrayList<>();
     Alumno alumSelect = new Alumno();
+    DefaultListModel modeloLista = new DefaultListModel();
 
-    private void Agregar(String nombre, String Apellido, String carnet) {
+    public void Agregar(String nombre, String apellido, Integer grado) {
         alumSelect.setNombre(nombre);
-        alumSelect.setApellido(Apellido);
-        alumSelect.setCarnet(carnet);
+        alumSelect.setApellido(apellido);
+        alumSelect.setCarnet(generadorCarne(nombre, apellido));
+        alumSelect.setGrado(grado);
+        alumnoList.add(alumSelect);
+        modeloLista.addElement(alumSelect.nombre + " " + alumSelect.apellido + " " + alumSelect.carnet + " " + alumSelect.grado);
+        alumSelect = new Alumno();
     }
 
     public String generadorCarne(String nombre, String apellido) {
@@ -23,6 +29,7 @@ public class Control {
         sb.append(nom);
         sb.append(ape);
         String anio = JOptionPane.showInputDialog(null, "Ingrese el año de ingreso ");
+        alumSelect.setIngreso(Integer.parseInt(anio));
         char a = anio.charAt(2);
         char b = anio.charAt(3);
         sb.append(a);
@@ -36,9 +43,12 @@ public class Control {
         } else {
             sb.append(numero);
         }
-        unir = sb.toString();
-        System.out.println("uni " + unir);
+        unir = sb.toString().toUpperCase();
         return unir;
-
     }
+
+    public DefaultListModel getModeloLista() {
+        return modeloLista;
+    }
+
 }

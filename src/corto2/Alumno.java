@@ -13,6 +13,17 @@ public class Alumno {
     Integer grado;
     Integer ingreso;
 
+    public Alumno(String nombre, String apellido, String carnet, Integer grado, Integer ingreso) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.carnet = carnet;
+        this.grado = grado;
+        this.ingreso = ingreso;
+    }
+
+    public Alumno() {
+    }
+
     public String getNombre() {
         return nombre;
     }
