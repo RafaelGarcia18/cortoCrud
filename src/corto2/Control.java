@@ -2,6 +2,7 @@ package corto2;
 
 import java.util.ArrayList;
 import java.util.Random;
+import javax.annotation.PostConstruct;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -17,8 +18,28 @@ public class Control {
         alumSelect.setCarnet(generadorCarne(nombre, apellido));
         alumSelect.setGrado(grado);
         alumnoList.add(alumSelect);
-        modeloLista.addElement(alumSelect.nombre + " " + alumSelect.apellido + " " + alumSelect.carnet + " " + alumSelect.grado);
         alumSelect = new Alumno();
+        modeloLista(alumnoList);
+    }
+
+    public void init() {
+        modeloLista(alumnoList);
+    }
+
+    public void modeloLista(ArrayList<Alumno> lista) {
+        modeloLista.removeAllElements();
+        for (Alumno alumno : lista) {
+            modeloLista.addElement(alumno.nombre + " " + alumno.apellido + " " + alumno.grado + " " + alumno.carnet + " " + alumno.ingreso);
+        }
+    }
+
+    public Alumno buscar(String carnet) {
+        for (Alumno alumno : alumnoList) {
+            if (alumno.carnet.equals(carnet.toUpperCase())) {
+                return alumno;
+            }
+        }
+        return null;
     }
 
     public String generadorCarne(String nombre, String apellido) {
@@ -49,6 +70,10 @@ public class Control {
 
     public DefaultListModel getModeloLista() {
         return modeloLista;
+    }
+
+    void modeloLista(Alumno busqueda) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
